@@ -25,7 +25,7 @@ const product = new ProductManager();
         return res.status(400).json({ error: 'Debe proporcionar todos los campos: title, description, code, price, stock, category, thumbnail (opcional).' });
     }
 
-    res.send(await product.addProducts(newProduct))
+    res.send(await product.addProduct(newProduct))
 })
 
  ProductRouter.put("/:id", async (req, res) => {
@@ -36,7 +36,7 @@ const product = new ProductManager();
 
  ProductRouter.delete("/:id", async (req, res) => {
     let id = req.params.id
-    res.send(await product.deleteProducts(id))
+    res.send(await product.deleteProduct(id))
 })
 
 export default ProductRouter

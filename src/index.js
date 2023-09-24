@@ -50,8 +50,5 @@ socketServer.on("connection",async (socket)=>{
         const updatedProducts = await pmanager.getProducts({});
         socketServer.emit("productosupdated", updatedProducts);
       });
-     
-
-     
 
 })

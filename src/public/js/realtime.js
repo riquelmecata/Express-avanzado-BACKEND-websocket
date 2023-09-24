@@ -1,4 +1,5 @@
 const socket = io();
+
 socket.on("productos", (products) => {
   console.log(products);
   updateProductList(products);
@@ -11,24 +12,29 @@ function updateProductList(products) {
 
   products.forEach((product) => {
     productos += `
-
     <article class="container">
-    <div class="card">
-        <div class="imgBx">
-          <img src="${product.thumbnail}" width="150" />
-        </div>
-        <div class="contentBx">
-          <h2>Nombre: ${product.title}</h2>
-            <h3>Descripción: ${product.description}</h3>
-                <td>Código: ${product.code}</td>
-                <td>Precio: ${product.price}</td>
-                <td>Stock: ${product.stock}</td>
-                <td>Categoría: ${product.category}</td>
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4 imgBx">
+                <img src="${product.thumbnail}" class="img-fluid rounded-start"/>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body contentBx">
+                    <h5 class="card-title">${product.title}</h5>
+                    <h4 class="card-title">$${product.price}</h4>                    
+                    <p class="card-text">${product.description}</p>
+                    <p class="card-text"><small class="text-body-secondary">Código: ${product.code}
+                    Stock: ${product.stock}
+                    Categoría: ${product.category}</small></p>
+                </div>
+            </div>
         </div>
     </div>
 </article>
         `;
   });
+
+
 
   div.innerHTML = productos;
 }
@@ -59,11 +65,11 @@ form.addEventListener("submit", (evt) => {
 });
 
 document.getElementById("delete-btn").addEventListener("click", function () {
-    const deleteidinput = document.getElementById("id-prod");
-    const deleteid = parseInt(deleteidinput.value);
-    socket.emit("deleteProduct", deleteid);
-    deleteidinput.value = "";
-  });
+  const deleteidinput = document.getElementById("id-prod");
+  const deleteid = deleteidinput.value; 
+  socket.emit("deleteProduct", deleteid);
+  deleteidinput.value = "";
+});
 socket.on("productosupdated", (obj) => {
   updateProductList(obj);
 });

@@ -41,14 +41,14 @@ class ProductManager {
     updateProducts = async (id, product) => {
         let productById = await this.exist(id)
         if(!productById) return "Producto no encontrado"
-        await this.deleteProducts(id)
+        await this.deleteProduct(id)
         let oldProducts = await this.readProducts()
         let products = [{...product, id : id}, ...oldProducts]
         await this.writeProducts(products)
         return "Producto actualizado"
     }
 
-    deleteProducts = async (id) => {
+    deleteProduct = async (id) => {
         let products = await this.readProducts();
         let existProducts = products.some(prod => prod.id === id)
         if (existProducts) {
