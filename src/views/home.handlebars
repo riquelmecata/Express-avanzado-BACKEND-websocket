@@ -1,0 +1,20 @@
+{{#each listaproductos}}
+<article class="container">
+    <div class="card">
+        <div class="imgBx">
+          <img src="{{thumbnail}}" width="150" />
+        </div>
+        <div class="contentBx">
+          <h2>Nombre: {{title}}</h2>
+            <h3>Descripción: {{description}}</h3>
+                <td>Código: {{code}}</td>
+                <td>Precio: {{price}}</td>
+                <td>Stock: {{stock}}</td>
+                <td>Categoría: {{category}}</td>
+        </div>
+    </div>
+</article>
+{{/each}}
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>
